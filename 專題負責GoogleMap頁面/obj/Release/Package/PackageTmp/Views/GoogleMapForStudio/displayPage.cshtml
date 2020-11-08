@@ -1,0 +1,252 @@
+﻿@{
+    ViewBag.Title = "displayPage";
+}
+
+
+<h3>健身工作室</h3>
+
+
+<div>
+    <form>
+        <div style="float:left;width:500px;margin-top:15px">
+            <div>
+                <select style="width:100px" id="countySelecting"></select>
+                <select style="width:120px" id="districtSelecting"></select>
+                <br />
+                <select style="width:700px;margin-top:8px" id="corpSelecting"></select>
+            </div>
+            <div style="margin-bottom:15px;margin-top:13px" id="studioPic">
+            </div>
+        </div>
+    </form>
+
+    <div id="map" style="height:400px;width:600px"></div>
+    <script src="~/Scripts/development jQuery 3.5.1.js"></script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD88S-UurR0hV9zx74bv5BFTBp1NJN3Sv8&callback=initMap">
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD88S-UurR0hV9zx74bv5BFTBp1NJN3Sv8&libraries=places"></script>
+
+    <script>
+        var pageMap;
+        var position;
+        var jasonObject;
+        let marker_outside = [];
+        let infowindow_global;
+
+        $(function () {
+            $(document).ready(function () {
+                $.ajax({
+                    url: "/GoogleMapForStudio/defaultPage",
+                    type: "GET",
+                    //data: $("form").serialize(),
+                    success: function (data) {
+                        jasonObject = JSON.parse(data);
+                        var distincts = [...new Set(jasonObject.map(p => p.fCounty))];
+                        $.each(distincts, function (i, value) {
+                            $("#countySelecting").append("<option class='selector1' value ='" + value + "'>" + value + "</option>");
+                        });
+                        distincts.length = 0;
+                        $.each(jasonObject, function (i, value) {
+                            if ($(".selector1").first().text() === value.fCounty)
+                                distincts.push(value.fDistrict);
+                        });
+                        var result = [...new Set(distincts)];
+                        $.each(result, function (i, value) {
+                            $("#districtSelecting").append("<option class='selector2' value ='" + value + "'>" + value + "</option>");
+                        });
+                        $.each(jasonObject, function (i, value) {
+                            if ($(".selector2").first().text() === value.fDistrict)
+                                $("#corpSelecting").append("<option class='selector3' value ='" + value.fCorpName + "'>" + value.fCorpName + "</option>");
+                            if ($(".selector3").first().text() === value.fCorpName)
+                                $("#studioPic").append("<img src='" + value.cfImage + "'style='height:317px;width:470px' />");
+                        });
+                    }
+                });
+            })
+            $("#countySelecting").change(function () {
+                let index = 0;
+                let isFirstOption = true;
+
+                $(this).nextAll().empty();
+                var distincts = [];
+                $.each(jasonObject, function (i, value) {
+                    if ($("#countySelecting").find(":selected").text() === value.fCounty) {
+                        distincts.push(value.fDistrict);
+                    }
+                    if ($("#districtSelecting").find(":selected").text() === value.fDistrict) {
+                        $("#corpSelecting").append("<option class='selector3' value ='" + value.fCorpName + "'>" + value.fCorpName + "</option>");
+                        $("#studioPic").empty();
+                        $("#studioPic").append("<img src='" + value.cfImage + "'style='height:317px;width:470px' />");
+                    }
+                });
+                var result = [...new Set(distincts)];
+                $.each(result, function (i, value) {
+                    $("#districtSelecting").append("<option class='selector2' value ='" + value + "'>" + value + "</option>");
+                });
+                $.each(jasonObject, function (i, value) {
+                    if ($("#districtSelecting").find(":selected").text() === value.fDistrict) {
+                        $("#corpSelecting").append("<option class='selector3' value ='" + value.fCorpName + "'>" + value.fCorpName + "</option>");
+                        position = { lat: value.fLatitude, lng: value.fLongitude };
+                        if (isFirstOption) {
+                            index = i;
+                            infowindow_global.setContent(
+                                "<div><strong>" + value.fCorpName +
+                                "</strong><br>" + "地址：" + value.fCounty +
+                                value.fDistrict + "<br>" + value.fAddress + "</div>"
+                            );
+                            isFirstOption = false;
+                        }
+                    }
+                    if ($(".selector3").first().text() === value.fCorpName)
+                        $("#studioPic").append("<img src='" + value.cfImage + "'style='height:317px;width:470px' />");
+                });
+                pageMap.panTo(position);
+                infowindow_global.open(pageMap, marker_outside[index]);
+            });
+
+            $("#districtSelecting").change(function () {
+                let index = 0;
+                let isFirstOption = true;
+                $(this).nextAll().empty();
+                $.each(jasonObject, function (i, value) {
+                    if ($("#districtSelecting").find(":selected").text() === value.fDistrict) {
+                        $("#corpSelecting").append("<option class='selector3' value ='" + value.fCorpName + "'>" + value.fCorpName + "</option>");
+                        position = { lat: value.fLatitude, lng: value.fLongitude };
+                        if (isFirstOption) {
+                            index = i;
+                            infowindow_global.setContent(
+                                "<div><strong>" + value.fCorpName +
+                                "</strong><br>" + "地址：" + value.fCounty +
+                                value.fDistrict + "<br>" + value.fAddress + "</div>"
+                            );
+                            isFirstOption = false;
+                        }
+                    }
+                    if ($(".selector3").first().text() === value.fCorpName)
+                        $("#studioPic").append("<img src='" + value.cfImage + "'style='height:317px;width:470px' />");
+                });
+                pageMap.panTo(position);
+                infowindow_global.open(pageMap, marker_outside[index]);
+            });
+
+            $("#corpSelecting").change(function () {
+                let index = 0;
+                let isFirstOption = true;
+
+                $.each(jasonObject, function (i, value) {
+                    if ($("#corpSelecting").find(":selected").text() === value.fCorpName) {
+                        position = { lat: value.fLatitude, lng: value.fLongitude };
+                        $("#studioPic").empty();
+                        $("#studioPic").append("<img src='" + value.cfImage + "'style='height:317px;width:470px' />");
+                        if (isFirstOption) {
+                            index = i;
+                            infowindow_global.setContent(
+                                "<div><strong>" + value.fCorpName +
+                                "</strong><br>" + "地址：" + value.fCounty +
+                                value.fDistrict + "<br>" + value.fAddress + "</div>"
+                            );
+                            isFirstOption = false;
+                        }
+                    }
+                });
+                pageMap.panTo(position);
+                infowindow_global.open(pageMap, marker_outside[index]);
+            });
+        });
+
+        function initMap() {
+            $.ajax({
+                url: "/GoogleMapForStudio/defaultPage",
+                type: "GET",
+                //data: $("form").serialize(),
+                success: function (data) {
+                    jasonObject = JSON.parse(data);
+                    const map = new google.maps.Map(document.getElementById('map'), {
+                        center: {
+                            lat: 25.033920,
+                            lng: 121.543399
+                        },
+                        zoom: 16
+                    });
+                    pageMap = map;
+                    let infowindow = new google.maps.InfoWindow();
+                    $.each(jasonObject, function (i, value) {
+                        let markers = new google.maps.Marker({
+                            map,
+                            position: {
+                                lat: value.fLatitude,
+                                lng: value.fLongitude
+                            },
+                            animation: google.maps.Animation.DROP
+                        });
+                        google.maps.event.addListener(markers, "click", function () {
+                            infowindow.setContent(
+                                "<div><strong>" + value.fCorpName +
+                                "</strong><br>" + "地址：" + value.fCounty +
+                                value.fDistrict + "<br>" + value.fAddress + "</div>"
+                            );
+                            infowindow.open(map, this);
+
+                            /////////////////////////////////////////////////////
+                            $("select").empty();
+                            let distincts = [...new Set(jasonObject.map(p => p.fCounty))];
+                            $.each(distincts, function (i, innerValue) {
+                                $("#countySelecting").append("<option class='selector1' value ='" + innerValue + "'>" + innerValue + "</option>");
+                            });
+                            $(".selector1").each(function () {
+                                if ($(this).text() === value.fCounty) {
+                                    $(this).attr("selected", true);
+                                }
+                            })
+                            distincts.length = 0;
+                            /////////////////////////////////////////////////////
+
+                            //上下有機會交替看看，練習
+
+                            /////////////////////////////////////////////////////
+                            //$("#countySelecting").nextAll().empty();
+                            //$("#countySelecting option[value='" + value.fCounty + "']").attr("selected", true);
+                            //let distincts = [];
+                            /////////////////////////////////////////////////////////
+
+
+                            $.each(jasonObject, function (i, innerValue) {
+                                if (value.fCounty === innerValue.fCounty)
+                                    distincts.push(innerValue.fDistrict);
+                            });
+                            var result = [...new Set(distincts)];
+                            $.each(result, function (i, innerValue) {
+                                $("#districtSelecting").append("<option class='selector2' value ='" + innerValue + "'>" + innerValue + "</option>");
+                            })
+
+                            $(".selector2").each(function () {
+                                if ($(this).text() === value.fDistrict) {
+                                    $(this).attr("selected", true);
+                                }
+                            })
+                            $.each(jasonObject, function (i, innerValue) {
+                                if (value.fDistrict === innerValue.fDistrict) {
+                                    $("#corpSelecting").append("<option class='selector3' value ='" + innerValue.fCorpName + "'>" + innerValue.fCorpName + "</option>");
+                                }
+                            });
+                            $(".selector3").each(function () {
+                                if ($(this).text() === value.fCorpName) {
+                                    $(this).attr("selected", true);
+                                }
+                            })
+                            $.each(jasonObject, function (i, innerValue) {
+                                if (value.fCorpName === innerValue.fCorpName) {
+                                    $("#studioPic").empty();
+                                    $("#studioPic").append("<img src='" + innerValue.cfImage + "'style='height:317px;width:470px' />");
+                                }
+                            });
+                        });
+                        marker_outside.push(markers);
+                        infowindow_global = infowindow;
+                    });
+                }
+            });
+        }
+    </script>
+</div>

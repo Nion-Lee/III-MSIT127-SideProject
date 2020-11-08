@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="期末專題_Test資料庫Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tStudio">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fCorpName" Type="nvarchar" MaxLength="20" />
+    <Property Name="fTaxId" Type="char" MaxLength="8" />
+    <Property Name="fPhone" Type="varchar" MaxLength="20" />
+    <Property Name="fEmail" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="fPasswords" Type="char" MaxLength="20" />
+    <Property Name="fOwner" Type="nvarchar" MaxLength="20" />
+    <Property Name="fRepresentative" Type="nvarchar" MaxLength="20" />
+    <Property Name="fStudioNumber" Type="char" MaxLength="13" />
+    <Property Name="fCounty" Type="nvarchar" MaxLength="20" />
+    <Property Name="fDistrict" Type="nvarchar" MaxLength="20" />
+    <Property Name="fAddress" Type="nvarchar" MaxLength="50" />
+    <Property Name="cfImage" Type="varchar" MaxLength="100" />
+    <Property Name="fLongitude" Type="real" />
+    <Property Name="fLatitude" Type="real" />
+    <Property Name="fRegisterTime" Type="date" />
+    <Property Name="fActivated" Type="bit" />
+    <Property Name="fNotification" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <Function Name="spGetCountyDistinctly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="期末專題_Test資料庫ModelStoreContainer">
+    <EntitySet Name="tStudio" EntityType="Self.tStudio" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

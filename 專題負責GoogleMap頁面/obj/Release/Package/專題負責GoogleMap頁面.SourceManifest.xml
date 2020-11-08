@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\Nion\Desktop\專題負責GoogleMap頁面_0923_學校_應該已經完成\專題負責GoogleMap頁面_0923_學校_應該已經完成\專題負責GoogleMap頁面\專題負責GoogleMap頁面\obj\Release\Package\PackageTmp" />
+  <setAcl path="C:\Users\Nion\Desktop\專題負責GoogleMap頁面_0923_學校_應該已經完成\專題負責GoogleMap頁面_0923_學校_應該已經完成\專題負責GoogleMap頁面\專題負責GoogleMap頁面\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="C:\Users\Nion\Desktop\專題負責GoogleMap頁面_0923_學校_應該已經完成\專題負責GoogleMap頁面_0923_學校_應該已經完成\專題負責GoogleMap頁面\專題負責GoogleMap頁面\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+</sitemanifest>

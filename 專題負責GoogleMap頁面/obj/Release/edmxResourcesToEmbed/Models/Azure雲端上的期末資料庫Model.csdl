@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Azure雲端上的期末資料庫Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tStudio">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fCorpName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fTaxId" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="fPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="fEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fPasswords" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+    <Property Name="fOwner" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fRepresentative" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fStudioNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="false" />
+    <Property Name="fCounty" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fDistrict" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="cfImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fLongitude" Type="Single" />
+    <Property Name="fLatitude" Type="Single" />
+    <Property Name="fRegisterTime" Type="DateTime" Precision="0" />
+    <Property Name="fActivated" Type="Boolean" />
+    <Property Name="fNotification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="Azure雲端上的期末資料庫Entities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tStudio" EntityType="Self.tStudio" />
+    <FunctionImport Name="spGetCountyDistinctly" ReturnType="Collection(String)" />
+  </EntityContainer>
+</Schema>

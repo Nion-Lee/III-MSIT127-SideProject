@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="在家測試的期末專題資料庫ModelStoreContainer" CdmEntityContainer="在家測試的期末專題資料庫Entities">
+    <EntitySetMapping Name="tStudio">
+      <EntityTypeMapping TypeName="在家測試的期末專題資料庫Model.tStudio">
+        <MappingFragment StoreEntitySet="tStudio">
+          <ScalarProperty Name="fId" ColumnName="fId" />
+          <ScalarProperty Name="fCorpName" ColumnName="fCorpName" />
+          <ScalarProperty Name="fCounty" ColumnName="fCounty" />
+          <ScalarProperty Name="fDistrict" ColumnName="fDistrict" />
+          <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+          <ScalarProperty Name="cfImage" ColumnName="cfImage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

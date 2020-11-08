@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="期末專題_Test資料庫ModelStoreContainer" CdmEntityContainer="期末專題_Test資料庫Entities">
+    <EntitySetMapping Name="tStudio">
+      <EntityTypeMapping TypeName="期末專題_Test資料庫Model.tStudio">
+        <MappingFragment StoreEntitySet="tStudio">
+          <ScalarProperty Name="fId" ColumnName="fId" />
+          <ScalarProperty Name="fCorpName" ColumnName="fCorpName" />
+          <ScalarProperty Name="fTaxId" ColumnName="fTaxId" />
+          <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+          <ScalarProperty Name="fEmail" ColumnName="fEmail" />
+          <ScalarProperty Name="fPasswords" ColumnName="fPasswords" />
+          <ScalarProperty Name="fOwner" ColumnName="fOwner" />
+          <ScalarProperty Name="fRepresentative" ColumnName="fRepresentative" />
+          <ScalarProperty Name="fStudioNumber" ColumnName="fStudioNumber" />
+          <ScalarProperty Name="fCounty" ColumnName="fCounty" />
+          <ScalarProperty Name="fDistrict" ColumnName="fDistrict" />
+          <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+          <ScalarProperty Name="cfImage" ColumnName="cfImage" />
+          <ScalarProperty Name="fLongitude" ColumnName="fLongitude" />
+          <ScalarProperty Name="fLatitude" ColumnName="fLatitude" />
+          <ScalarProperty Name="fRegisterTime" ColumnName="fRegisterTime" />
+          <ScalarProperty Name="fActivated" ColumnName="fActivated" />
+          <ScalarProperty Name="fNotification" ColumnName="fNotification" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="spGetCountyDistinctly" FunctionName="期末專題_Test資料庫Model.Store.spGetCountyDistinctly" />
+  </EntityContainerMapping>
+</Mapping>

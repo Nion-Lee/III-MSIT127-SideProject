@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Azure雲端上的期末資料庫Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tStudio">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fCorpName" Type="nvarchar" MaxLength="20" />
+          <Property Name="fTaxId" Type="char" MaxLength="8" />
+          <Property Name="fPhone" Type="varchar" MaxLength="20" />
+          <Property Name="fEmail" Type="varchar" MaxLength="40" Nullable="false" />
+          <Property Name="fPasswords" Type="char" MaxLength="20" />
+          <Property Name="fOwner" Type="nvarchar" MaxLength="20" />
+          <Property Name="fRepresentative" Type="nvarchar" MaxLength="20" />
+          <Property Name="fStudioNumber" Type="char" MaxLength="13" />
+          <Property Name="fCounty" Type="nvarchar" MaxLength="20" />
+          <Property Name="fDistrict" Type="nvarchar" MaxLength="20" />
+          <Property Name="fAddress" Type="nvarchar" MaxLength="50" />
+          <Property Name="cfImage" Type="varchar" MaxLength="100" />
+          <Property Name="fLongitude" Type="real" />
+          <Property Name="fLatitude" Type="real" />
+          <Property Name="fRegisterTime" Type="date" />
+          <Property Name="fActivated" Type="bit" />
+          <Property Name="fNotification" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Function Name="spGetCountyDistinctly" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Azure雲端上的期末資料庫ModelStoreContainer">
+          <EntitySet Name="tStudio" EntityType="Self.tStudio" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Azure雲端上的期末資料庫Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tStudio">
+          <Key>
+            <PropertyRef Name="fId" />
+          </Key>
+          <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fCorpName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fTaxId" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="fPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="fEmail" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fPasswords" Type="String" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Name="fOwner" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fRepresentative" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fStudioNumber" Type="String" MaxLength="13" FixedLength="true" Unicode="false" />
+          <Property Name="fCounty" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fDistrict" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cfImage" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fLongitude" Type="Single" />
+          <Property Name="fLatitude" Type="Single" />
+          <Property Name="fRegisterTime" Type="DateTime" Precision="0" />
+          <Property Name="fActivated" Type="Boolean" />
+          <Property Name="fNotification" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="Azure雲端上的期末資料庫Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tStudio" EntityType="Self.tStudio" />
+          <FunctionImport Name="spGetCountyDistinctly" ReturnType="Collection(String)" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Azure雲端上的期末資料庫ModelStoreContainer" CdmEntityContainer="Azure雲端上的期末資料庫Entities1">
+          <EntitySetMapping Name="tStudio">
+            <EntityTypeMapping TypeName="Azure雲端上的期末資料庫Model.tStudio">
+              <MappingFragment StoreEntitySet="tStudio">
+                <ScalarProperty Name="fId" ColumnName="fId" />
+                <ScalarProperty Name="fCorpName" ColumnName="fCorpName" />
+                <ScalarProperty Name="fTaxId" ColumnName="fTaxId" />
+                <ScalarProperty Name="fPhone" ColumnName="fPhone" />
+                <ScalarProperty Name="fEmail" ColumnName="fEmail" />
+                <ScalarProperty Name="fPasswords" ColumnName="fPasswords" />
+                <ScalarProperty Name="fOwner" ColumnName="fOwner" />
+                <ScalarProperty Name="fRepresentative" ColumnName="fRepresentative" />
+                <ScalarProperty Name="fStudioNumber" ColumnName="fStudioNumber" />
+                <ScalarProperty Name="fCounty" ColumnName="fCounty" />
+                <ScalarProperty Name="fDistrict" ColumnName="fDistrict" />
+                <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+                <ScalarProperty Name="cfImage" ColumnName="cfImage" />
+                <ScalarProperty Name="fLongitude" ColumnName="fLongitude" />
+                <ScalarProperty Name="fLatitude" ColumnName="fLatitude" />
+                <ScalarProperty Name="fRegisterTime" ColumnName="fRegisterTime" />
+                <ScalarProperty Name="fActivated" ColumnName="fActivated" />
+                <ScalarProperty Name="fNotification" ColumnName="fNotification" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spGetCountyDistinctly" FunctionName="Azure雲端上的期末資料庫Model.Store.spGetCountyDistinctly" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
